@@ -1,16 +1,16 @@
-Data Structure: Array
-Storage Method: Dynamic Array
-Key Methods:
+# Data Structure: Array
+# Storage Method: Dynamic Array
+# Key Methods:
 + Length() 
-	Complexity: O(1)
+	+ Complexity: O(1)
 + operator[]
-	Complexity: O(1)
+	+ Complexity: O(1)
 + At()
-	Complexity: O(1)
+	+ Complexity: O(1)
 + Fill()
-	Complexity: O(n)
+	+ Complexity: O(n)
 
-Description: 
+# Description: 
 + Similar to standard array expect it 
 contains methods.
 + Although constructed with a dynamic
