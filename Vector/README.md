@@ -1,5 +1,5 @@
 ### Data Structure: 
-+ Array
++ Vector
 ### Storage Method: 
 + Dynamic Array
 ### Key Methods:
@@ -9,11 +9,14 @@
 	+ Complexity: O(1)
 + At()
 	+ Complexity: O(1)
-+ Fill()
++ Insert()
+	+ Complexity: O(1)
++ Remove()
+	+ Complexity: O(1)
++ Optimize()
 	+ Complexity: O(n)
 
+
 ### Description: 
-+ Similar to standard array expect it 
-contains methods.
-+ Although constructed with a dynamic
-array, the size is static. 
++ It is an adjustable array. The size of a 
+vector can be modified during its life cycle
