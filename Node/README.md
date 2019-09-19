@@ -13,5 +13,5 @@
 	+ Complexity: O(n)
 
 ### Description: 
-+ It is a data storage method for other
-data structures.
++ It is a data storage method for data 
+structures.
