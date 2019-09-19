@@ -11,13 +11,13 @@ namespace ds
 	class Node
 	{
 	private:
-		T* data;
+		T data;
 		Node<T>* link;
 
 		Node(const Node<T>& obj);
 		Node& operator=(const Node<T>& rhs);
 	public:
-		Node() : Node(T(),NULL)(10) {}
+		Node() : Node(T(),NULL) {}
 
 		Node(const T& data) : Node(data,NULL) {}
 
