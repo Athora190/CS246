@@ -1,8 +1,20 @@
 #include <iostream>
-#include "Node.h"
+#include "LinkedList.h"
+using namespace ds;
 
 int main()
 {
-	ds::Node<int> *t, s;
+	LinkedList<double> list;
+
+	list.InsertInFront(23);
+	list.InsertInBack(5);
+	list.InsertInBack(78);
+
+	std::cout << list << "\n";
+
+	list.RemoveFromBack();
+
+	std::cout << list << "\n\n";
+ 	
 	return 0;
 }

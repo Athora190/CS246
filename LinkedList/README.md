@@ -3,14 +3,14 @@
 ### Storage Method: 
 + Node
 ### Key Methods:
-+ InsertAtFront()  
++ InsertInFront()  
 	+ Complexity: O(1)
-+ InsertAtBack()
++ InsertInBack()
 	+ Complexity: O(1)
 + RemoveFromFront()
 	+ Complexity: O(1)
 + RemoveFromBack()
-	+ Complexity: O(1)
+	+ Complexity: O(n)
 + Front()
 	+ Complexity: O(1)
 + Back()
@@ -19,6 +19,10 @@
 	+ Complexity: O(n)
 + InsertAfter()
 	+ Complexity: O(n)
++ Remove()
+	+ Complexity: O(n)
++ IsEmpty() 
+	+ Complexity: O(1)
 
 ### Description: 
 + It is a data storage method for data 

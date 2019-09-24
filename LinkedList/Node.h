@@ -50,6 +50,19 @@ namespace ds
 			return out;
 		}
 	};
-}
-		
+
+	template<typename T>
+	void Clear(Node<T>*& root)
+	{
+		Node<T> *tmp;
+
+		while(root != NULL)
+		{
+			tmp = root;
+			root = root->GetLink();
+			delete tmp;
+			tmp = NULL;
+		}
+	}
+}		
 #endif
