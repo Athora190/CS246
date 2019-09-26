@@ -11,10 +11,6 @@
 	+ Complexity: O(1)
 + RemoveFromBack()
 	+ Complexity: O(n)
-+ Front()
-	+ Complexity: O(1)
-+ Back()
-	+ Complexity: O(1)
 + InsertBefore()
 	+ Complexity: O(n)
 + InsertAfter()
@@ -23,7 +19,10 @@
 	+ Complexity: O(n)
 + IsEmpty() 
 	+ Complexity: O(1)
-
++ Length()
+	+ Complexity: O(1)
++ operator[]
+	+ Complexity: O(n)
 ### Description: 
-+ It is a data storage method for data 
-structures.
++ It is a resizable list that permits modifications and
+view at any position in the list.

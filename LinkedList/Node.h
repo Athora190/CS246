@@ -64,5 +64,28 @@ namespace ds
 			tmp = NULL;
 		}
 	}
-}		
+
+	template<typename T>
+	Node<T>* Copy(Node<T>* root)
+	{
+		if(root == NULL)
+		{
+			return NULL;
+		}
+		
+		Node<T> *head = new Node<T>(root->GetDate());
+		Node<T> *tmp2 = head;
+		Node<T> *tmp1 = root->GetLink();
+
+		while(tmp1 != NULL)
+		{
+			tmp2->SetLink(new Node<T>(tmp1->GetData()));
+			tmp1 = tmp1->GetLink();
+			tmp2 = tmp2->GetLink();
+		}
+
+		return head;
+	}
+
+}			
 #endif

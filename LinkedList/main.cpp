@@ -12,7 +12,7 @@ int main()
 
 	std::cout << list << "\n";
 
-	list.RemoveFromBack();
+	list.Remove(5);
 
 	std::cout << list << "\n\n";
  	

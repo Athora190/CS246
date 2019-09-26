@@ -13,29 +13,14 @@ namespace ds
 	{
 	private:
 		Node<T>* head;
-		Node<T>* rear;
 		int size;
 	public:
-		LinkedList() : head(NULL), rear(NULL), size(0) {}
+		LinkedList() : head(NULL), size(0) {}
 
 		LinkedList(const LinkedList<T>& obj)
 		{
 			size = obj.size;
-			Node<T>* tmp = obj.head;
-
-			if(tmp != NULL)
-			{
-				head = new Node<T>(tmp->GetData());
-				rear = head;
-				tmp = tmp->GetLink();
-
-				while(tmp != NULL)
-				{
-					rear->SetLink(new Node<T>(tmp->GetData()));
-					rear = rear->GetLink();
-					tmp = tmp->GetLink();
-				}
-			}
+			head = Copy(obj.head);
 		}
 
 		LinkedList<T>& operator=(const LinkedList<T>& rhs)
@@ -44,22 +29,7 @@ namespace ds
 			{
 				size = rhs.size;
 				Clear(head);
-				rear = NULL;
-				Node<T>* tmp = rhs.head;
-
-				if(tmp != NULL)
-				{
-					head = new Node<T>(tmp->GetData());
-					rear = head;
-					tmp = tmp->GetLink();
-
-					while(tmp != NULL)
-					{
-						rear->SetLink(new Node<T>(tmp->GetData()));
-						rear = rear->GetLink();
-						tmp = tmp->GetLink();
-					}
-				}
+				head = Copy(rhs.head);
 			}
 
 			return *this;			
@@ -68,7 +38,6 @@ namespace ds
 		~LinkedList() 
 		{
 			Clear(head);
-			rear = NULL;
 		}
 
 		void InsertInFront(const T& data)
@@ -76,7 +45,6 @@ namespace ds
 			if(head == NULL)
 			{
 				head = new Node<T>(data);
-				rear = head;
 			}
 			else 
 			{
@@ -89,66 +57,146 @@ namespace ds
 
 		void InsertInBack(const T& data)
 		{
-			if(rear == NULL)
+			if(head == NULL)
 			{
-				rear = new Node<T>(data);
-				head = rear;
+				head = new Node<T>(data);
 			}
 			else
 			{
-				rear->SetLink(new Node<T>(data));
-				rear = rear->GetLink();
+				Node<T>* tmp = head;
+				
+				while(tmp->GetLink() != NULL)
+				{
+					tmp = tmp->GetLink();
+				}
+				tmp->SetLink(new Node<T>(data));
 			}
 			size += 1;
 		}
 
+		void InsertBefore(const T& value,const T& data)
+		{
+			if(head != NULL)
+			{
+				if(head->GetData() == value)
+				{
+					InsertInFront(data);
+				}
+				else
+				{
+					Node<T>* tmp = head;
+					
+					while(tmp->GetLink() != NULL && tmp->GetLink()->GetData() != value)
+					{
+						tmp = tmp->GetLink();
+					}
+
+					if(tmp->GetLink() != NULL)
+					{
+						Node<T>* newData = new Node<T>(data);
+						newData->SetLink(tmp->GetLink());
+						tmp->SetLink(newData);
+						size += 1;
+					}
+				}
+			}
+		}
+		
+		void InsertAfter(const T& value,const T& data)
+		{
+			if(head != NULL)
+			{
+				Node<T>* tmp = head;
+					
+				while(tmp != NULL && tmp->GetData() != value)
+				{
+					tmp = tmp->GetLink();
+				}
+
+				if(tmp != NULL)
+				{
+					Node<T>* newData = new Node<T>(data);
+					newData->SetLink(tmp->GetLink());
+					tmp->SetLink(newData);
+					size += 1;
+				}
+			}
+		}
+	
+		bool IsEmpty() const {return head == NULL;}
+
+		int Length() const {return size;}
+	
+		T& operator[](int index)
+		{
+			if(index >= 0 && index < size)
+			{
+				Node<T>* tmp = head;
+				for(int i = 0;i < index;i += 1)
+				{
+					tmp = tmp->GetLink();
+				}
+
+				return tmp->GetData();
+			}
+			throw "Out of Bound";
+		}
+
+		const T& operator[](int index) const
+		{
+			if(index >= 0 && index < size)
+			{
+				Node<T>* tmp = head;
+				for(int i = 0;i < index;i += 1)
+				{
+					tmp = tmp->GetLink();
+				}
+
+				return tmp->GetData();
+			}
+			throw "Out of Bound";
+		}
+
 		void RemoveFromFront() 
 		{
-			if(!IsEmpty())
+			if(head != NULL)
 			{
-				Node<T> tmp = head;
+				Node<T>* tmp = head;
 				head = head->GetLink();
 				delete tmp;
 				tmp = NULL;
-
-				if(head == NULL)
-				{
-					rear = NULL;
-				}
-
 				size -= 1;
 			}
 		}
 
-		void RemoveFromBack()
+		void Remove(const T& value)
 		{
-			if(!IsEmpty())
+			if(head != NULL)
 			{
-				if(rear == head)
+				if(head->GetData() == value)
 				{
-					delete rear;
-					rear = NULL;
-					head = NULL;
+					RemoveFromFront();
 				}
 				else
 				{
-					Node<T> *tmp = head;
-					
-					while(tmp->GetLink() != rear)
+					Node<T>* tmp = head;
+
+					while(tmp->GetLink() != NULL && tmp->GetLink()->GetData() != value)
 					{
 						tmp = tmp->GetLink();
 					}
 					
-					delete rear;
-					tmp->SetLink(NULL);
-					rear = tmp;
+					if(tmp->GetLink() != NULL)
+					{
+						Node<T>* oldData = tmp->GetLink();
+						tmp->SetLink(oldData->GetLink());
+						delete oldData;
+						oldData;
+						size -= 1;
+					}
 				}
-				
-				size -= 1;
 			}
 		}
-
-		bool IsEmpty() const { return (head == rear && head == NULL);}
 
 		std::string ToString() const
 		{
