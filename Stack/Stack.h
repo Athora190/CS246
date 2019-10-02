@@ -12,21 +12,21 @@ namespace ds
 	class Stack
 	{
 	private:
-		Node<T>* head;
+		Node<T>* top;
 	public:
-		Stack() : head(NULL) {}
+		Stack() : top(NULL) {}
 
 		Stack(const Stack<T>& obj)
 		{
-			head = Copy(obj.head);
+			top = Copy(obj.top);
 		}
 
 		Stack<T>& operator=(const Stack<T>& rhs)
 		{
 			if(this != &rhs)
 			{
-				Clear(head);
-				head = Copy(rhs.head);
+				Clear(top);
+				top = Copy(rhs.top);
 			}
 
 			return *this;			
@@ -34,31 +34,32 @@ namespace ds
 
 		~Stack() 
 		{
-			Clear(head);
+			Clear(top);
+			top = NULL;
 		}
 
 		void Push(const T& data)
 		{
-			if(head == NULL)
+			if(top == NULL)
 			{
-				head = new Node<T>(data);
+				top = new Node<T>(data);
 			}
 			else 
 			{
 				Node<T> *tmp = new Node<T>(data);
-				tmp->SetLink(head);
-				head = tmp;
+				tmp->SetLink(top);
+				top = tmp;
 			}
 		}
 
-		bool IsEmpty() const {return head == NULL;}
+		bool IsEmpty() const {return top == NULL;}
 	
 		void Pop() 
 		{
-			if(head != NULL)
+			if(top != NULL)
 			{
-				Node<T>* tmp = head;
-				head = head->GetLink();
+				Node<T>* tmp = top;
+				top = top->GetLink();
 				delete tmp;
 				tmp = NULL;
 			}
@@ -66,9 +67,9 @@ namespace ds
 
 		const T& Top() const 
 		{
-			if(head != NULL)
+			if(top != NULL)
 			{
-				return head->GetData();
+				return top->GetData();
 			}
 			throw "Empty Stack";
 		}
@@ -77,9 +78,9 @@ namespace ds
 		{
 			std::stringstream out;
 
-			if(head != NULL)
+			if(top != NULL)
 			{
-				out << head->GetData();
+				out << top->GetData();
 			}
 			else 
 			{
