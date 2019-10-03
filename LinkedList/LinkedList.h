@@ -169,6 +169,34 @@ namespace ds
 			}
 		}
 
+		void RemoveFromBack()
+		{
+			if(head != NULL)
+			{
+				if(head->GetLink() == NULL)
+				{
+					delete head;
+					head = NULL;
+				}	
+				else
+				{
+					Node<T> *tmp = head;
+					
+					while(tmp->GetLink()->GetLink() != NULL)
+					{
+						tmp = tmp->GetLink();
+					}
+					
+					Node<T>* oldValue = tmp->GetLink();
+					tmp->SetLink(NULL);
+					delete oldValue;
+					oldValue = NULL;
+				}
+				size -= 1;
+			}
+		}
+
+
 		void Remove(const T& value)
 		{
 			if(head != NULL)
