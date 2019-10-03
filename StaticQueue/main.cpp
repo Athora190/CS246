@@ -20,7 +20,7 @@ int main()
 		input += std::to_string(value) + ",";
 	}
 	input[input.length()-1] = '}';
-	
+
 	std::cout << "Inputs: " << input << "\n";
 
 	output = "{";

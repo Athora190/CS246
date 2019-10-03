@@ -16,13 +16,13 @@ namespace ds
 		int capacity;
 		T* data;
 	public:
-		StaticQueue() : StaticQueue(20) {}
+		StaticQueue() : StaticQueue(21) {}
 
 		StaticQueue(int capacity) : front(0), back(0), capacity(capacity) 
 		{
 			if(this->capacity <= 0)
 			{
-				this->capacity = 20;
+				this->capacity = 21;
 			}
 			data = new T[this->capacity];
 		}
@@ -96,7 +96,7 @@ namespace ds
 
 		int Size() const {return ((capacity + (back - front)) % capacity);}
 
-		int Capacity() const {return capacity;}
+		int Capacity() const {return (capacity - 1);}
 
 		std::string ToString() const
 		{
